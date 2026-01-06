@@ -1,19 +1,28 @@
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu__close" id="closeMenu"><i data-lucide="x"></i></button>
+  <ul class="mobile-menu__list">
+    <li><a href="#hero" class="mobile-menu__link">Главная</a></li>
+    <li><a href="#about" class="mobile-menu__link">О проекте</a></li>
+    <li><a href="#tech" class="mobile-menu__link">Технологии</a></li>
+    <li><a href="#benefits" class="mobile-menu__link">Преимущества</a></li>
+    <li><a href="#insights" class="mobile-menu__link">Перспективы</a></li>
+    <li><a href="#contact" class="btn btn--primary">Связаться</a></li>
+  </ul>
+</div>
+
 <header class="header">
-  <div class="container">
-    <nav class="nav">
-      <a class="nav-logo" href="./index.html" aria-label="Site logo">
-        <svg class="nav-logo-icon" width="100" height="30">
-          <use href="{=$icon-path}"></use>
-        </svg>
-      </a>
-      <ul class="nav-list">
-        <li class="nav-item">
-          <a class="nav-link {=$highlight-act}" href="./page-2.html">Page 2</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {=$highlight-curr}" href="./page-3.html">Page 3</a>
-        </li>
+  <div class="container header__container">
+    <a href="/" class="logo header__logo">Lytra-Cyte</a>
+    <nav class="header__nav">
+      <ul class="header__menu">
+        <li><a href="#hero" class="header__menu-link">Главная</a></li>
+        <li><a href="#about" class="header__menu-link">О проекте</a></li>
+        <li><a href="#tech" class="header__menu-link">Технологии</a></li>
+        <li><a href="#benefits" class="header__menu-link">Преимущества</a></li>
+        <li><a href="#insights" class="header__menu-link">Перспективы</a></li>
       </ul>
     </nav>
+    <a href="#contact" class="btn btn--header">Связаться</a>
+    <button class="header__burger" id="openMenu"><i data-lucide="menu"></i></button>
   </div>
 </header>
