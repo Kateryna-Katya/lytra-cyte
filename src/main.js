@@ -1,99 +1,71 @@
 document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
 
-    // 1. АНИМАЦИЯ HERO (Anime.js)
-    const canvas = document.getElementById('heroCanvas');
-    if (canvas) {
-        // Простая фоновая анимация кругов
-        anime({
-            targets: '.hero__title',
-            translateY: [50, 0],
-            opacity: [0, 1],
-            duration: 1500,
-            easing: 'easeOutExpo',
-            delay: 300
-        });
-        
-        anime({
-            targets: '.hero__text',
-            translateY: [30, 0],
-            opacity: [0, 1],
-            duration: 1500,
-            easing: 'easeOutExpo',
-            delay: 500
+    // 1. ВАЛИДАЦИЯ ТЕЛЕФОНА (Только цифры)
+    const phoneInput = document.getElementById('phoneInput');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', (e) => {
+            // Удаляем всё, кроме цифр
+            e.target.value = e.target.value.replace(/\D/g, '');
         });
     }
 
-    // 2. МОБИЛЬНОЕ МЕНЮ
-    const openBtn = document.getElementById('openMenu');
-    const closeBtn = document.getElementById('closeMenu');
+    // 2. HERO ANIMATION (Anime.js)
+    anime({
+        targets: '.hero__title',
+        translateY: [50, 0],
+        opacity: [0, 1],
+        easing: 'easeOutExpo',
+        duration: 2000,
+        delay: 500
+    });
+
+    // 3. МОБИЛЬНОЕ МЕНЮ
+    const openMenu = document.getElementById('openMenu');
+    const closeMenu = document.getElementById('closeMenu');
     const menu = document.getElementById('mobileMenu');
-    const menuLinks = document.querySelectorAll('.mobile-menu__link');
 
-    const toggleMenu = (state) => {
-        menu.classList.toggle('active', state);
-        document.body.style.overflow = state ? 'hidden' : '';
-    };
+    openMenu.onclick = () => menu.classList.add('active');
+    closeMenu.onclick = () => menu.classList.remove('active');
+    document.querySelectorAll('.mobile-menu__link').forEach(l => l.onclick = () => menu.classList.remove('active'));
 
-    openBtn.addEventListener('click', () => toggleMenu(true));
-    closeBtn.addEventListener('click', () => toggleMenu(false));
-    menuLinks.forEach(link => link.addEventListener('click', () => toggleMenu(false)));
-
-    // 3. КАПЧА И ФОРМА
+    // 4. КАПЧА
     const captchaQuest = document.getElementById('captchaQuest');
-    const captchaInput = document.getElementById('captchaInput');
-    const mainForm = document.getElementById('mainForm');
-    const formSuccess = document.getElementById('formSuccess');
+    const n1 = Math.floor(Math.random() * 9) + 1;
+    const n2 = Math.floor(Math.random() * 9) + 1;
+    const sum = n1 + n2;
+    if (captchaQuest) captchaQuest.textContent = `${n1} + ${n2}`;
 
-    let num1 = Math.floor(Math.random() * 10) + 1;
-    let num2 = Math.floor(Math.random() * 10) + 1;
-    let captchaResult = num1 + num2;
-    if(captchaQuest) captchaQuest.textContent = `${num1} + ${num2}`;
+    // 5. ОТПРАВКА ФОРМЫ
+    const form = document.getElementById('mainForm');
+    const successMsg = document.getElementById('formSuccess');
 
-    mainForm.addEventListener('submit', (e) => {
+    form.onsubmit = (e) => {
         e.preventDefault();
-        
-        if (parseInt(captchaInput.value) !== captchaResult) {
-            alert('Неверный ответ на капчу!');
+        const captchaInput = document.getElementById('captchaInput').value;
+
+        if (parseInt(captchaInput) !== sum) {
+            alert('Неверный ответ на пример!');
             return;
         }
 
-        // Имитация отправки
-        const btn = mainForm.querySelector('button');
-        const originalText = btn.textContent;
+        const btn = form.querySelector('button');
         btn.disabled = true;
         btn.textContent = 'Отправка...';
 
         setTimeout(() => {
-            mainForm.classList.add('hidden');
-            formSuccess.classList.remove('hidden');
-            lucide.createIcons(); // Перерисовать иконку в сообщении успеха
+            form.classList.add('hidden');
+            successMsg.classList.remove('hidden');
         }, 1500);
-    });
+    };
 
-    // 4. COOKIE POPUP
-    const cookiePopup = document.getElementById('cookiePopup');
-    const acceptBtn = document.getElementById('acceptCookies');
-
-    if (!localStorage.getItem('cookiesAccepted')) {
-        setTimeout(() => {
-            cookiePopup.classList.remove('hidden');
-        }, 2000);
+    // 6. COOKIES
+    const cookiePop = document.getElementById('cookiePopup');
+    if (!localStorage.getItem('lytra_cookies')) {
+        setTimeout(() => cookiePop.classList.remove('hidden'), 2000);
     }
-
-    acceptBtn.addEventListener('click', () => {
-        localStorage.setItem('cookiesAccepted', 'true');
-        cookiePopup.classList.add('hidden');
-    });
-
-    // 5. ПЛАВНЫЙ СКРОЛЛ
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    });
+    document.getElementById('acceptCookies').onclick = () => {
+        localStorage.setItem('lytra_cookies', 'true');
+        cookiePop.classList.add('hidden');
+    };
 });
