@@ -71,7 +71,7 @@
     <div class="container about__container">
         <div class="about__grid">
             <div class="about__image">
-                <img src="img/placeholder.png" alt="О проекте Lytra-Cyte">
+                <img src="/lytra-cyte/assets/one-BU_PoXcQ.jpg" alt="work with cup">
                 <div class="about__floating-card">
                     <span class="about__card-val">2026</span>
                     <span class="about__card-label">Платформа года</span>
@@ -139,7 +139,7 @@
             </div>
         </div>
         <div class="benefits__image">
-            <img src="img/placeholder.png" alt="Преимущества">
+            <img src="/lytra-cyte/assets/two-D8IXoAjH.jpg" alt="Work">
         </div>
     </div>
 </section>
@@ -160,8 +160,8 @@
 <section class="contact" id="contact">
     <div class="container contact__container">
         <div class="contact__form-wrap">
-            <h2 class="section-title">Бесплатная консультация по всем вопросам</h2>
-            <p class="section-text">Заполните форму, и наш менеджер свяжется с вами в течение 15 минут.</p>
+            <h2 class="section-title">Бесплатная консультация</h2>
+            <p class="section-text">Оставьте заявку, чтобы получить больше информации о проекте.</p>
 
             <form class="contact__form" id="mainForm">
                 <div class="form-group">
@@ -171,12 +171,13 @@
                     <input type="email" name="email" placeholder="Email" required class="form-input">
                 </div>
                 <div class="form-group">
-                    <input type="tel" name="phone" placeholder="Номер телефона" required class="form-input">
+                    <input type="text" name="phone" id="phoneInput" placeholder="Номер телефона (только цифры)" required
+                        class="form-input" pattern="\d+" inputmode="numeric">
                 </div>
 
                 <div class="captcha">
-                    <span class="captcha__text">Сколько будет <span id="captchaQuest"></span>?</span>
-                    <input type="number" id="captchaInput" placeholder="Ответ" required
+                    <span class="captcha__text">Решите пример: <span id="captchaQuest"></span> =</span>
+                    <input type="number" id="captchaInput" placeholder="?" required
                         class="form-input form-input--captcha">
                 </div>
 
@@ -185,11 +186,11 @@
                     <span>Я согласен с условиями использования и политикой конфиденциальности.</span>
                 </label>
 
-                <button type="submit" class="btn btn--primary btn--full">Отправить заявку</button>
+                <button type="submit" class="btn btn--primary btn--full">Отправить данные</button>
             </form>
             <div id="formSuccess" class="form-message hidden">
                 <i data-lucide="check-circle"></i>
-                <p>Спасибо! Ваши данные успешно отправлены. Мы свяжемся с вами в ближайшее время.</p>
+                <p>Успешно! Мы свяжемся с вами в ближайшее время.</p>
             </div>
         </div>
     </div>
